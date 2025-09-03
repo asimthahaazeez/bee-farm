@@ -1,6 +1,7 @@
 import { Plus, Eye, FileText, Cloud, Settings, Bell } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { BeeAnimation } from "./BeeAnimation";
 
 const quickActions = [
   {
@@ -35,13 +36,13 @@ const quickActions = [
 
 export function QuickActions() {
   return (
-    <Card className="weather-card h-fit">
+    <Card className="border-0 shadow-none bg-transparent">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          ⚡ Quick Actions
+        <CardTitle className="font-display flex items-center gap-2">
+          Quick Actions
+          <BeeAnimation size="sm" className="ml-2" />
         </CardTitle>
       </CardHeader>
-      
       <CardContent className="space-y-3">
         {quickActions.map((action) => {
           const Icon = action.icon;
@@ -49,26 +50,24 @@ export function QuickActions() {
           return (
             <Button
               key={action.id}
-              className={`w-full justify-start h-auto p-4 ${action.className}`}
-              variant={action.id === "inspect" ? "default" : "outline"}
+              className={`w-full justify-start gap-3 btn-organic bee-hover-target`}
+              variant="outline"
             >
-              <div className="flex items-center gap-3">
-                <Icon className="w-5 h-5 shrink-0" />
-                <div className="text-left">
-                  <p className="font-medium">{action.label}</p>
-                  <p className="text-xs opacity-80">{action.description}</p>
-                </div>
+              <Icon className="w-4 h-4" />
+              <div className="text-left">
+                <p className="font-medium">{action.label}</p>
+                <p className="text-xs opacity-80">{action.description}</p>
               </div>
             </Button>
           );
         })}
         
-        <div className="pt-3 border-t">
-          <Button variant="ghost" className="w-full justify-start" size="sm">
+        <div className="pt-3 border-t space-y-2">
+          <Button variant="ghost" className="w-full justify-start btn-organic bee-hover-target" size="sm">
             <Settings className="w-4 h-4 mr-2" />
             Settings
           </Button>
-          <Button variant="ghost" className="w-full justify-start" size="sm">
+          <Button variant="ghost" className="w-full justify-start btn-organic bee-hover-target" size="sm">
             <Bell className="w-4 h-4 mr-2" />
             Notifications
           </Button>

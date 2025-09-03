@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Cloud, Sun, CloudRain, Eye, Calendar, AlertTriangle } from "lucide-react";
+import { Cloud, Sun, CloudRain, Eye, Calendar, AlertTriangle, MapPin, Users, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { WeatherCard } from "@/components/WeatherCard";
 import { HiveOverview } from "@/components/HiveOverview";
 import { AIRecommendations } from "@/components/AIRecommendations";
 import { QuickActions } from "@/components/QuickActions";
+import { BeeAnimation, PollenParticle, BeeTrail } from "./BeeAnimation";
 import type { AIRecommendation, Hive, WeatherData } from "@/types/beekeeping";
 import heroImage from "@/assets/beekeeping-hero.jpg";
 
@@ -81,81 +83,118 @@ export function Dashboard() {
   const [selectedTimeframe, setSelectedTimeframe] = useState<'today' | '5day'>('5day');
 
   return (
-    <div className="min-h-screen bg-gradient-field">
-      {/* Hero Section */}
-      <div className="relative h-64 md:h-80 overflow-hidden">
-        <img 
-          src={heroImage} 
-          alt="Beautiful beekeeping scene with hives in a meadow"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
-        <div className="absolute bottom-6 left-6 text-white">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            BeeKeeper Pro
-          </h1>
-          <p className="text-lg opacity-90">
-            Smart insights for successful beekeeping
-          </p>
-        </div>
-        
-        {/* Floating bee animation for desktop */}
-        <div className="hidden md:block absolute top-20 right-20 animate-float">
-          <div className="w-8 h-8 bg-honey rounded-full opacity-80 animate-pulse-soft" />
-        </div>
+    <div className="min-h-screen bg-gradient-sunset bee-cursor">
+      {/* Floating Elements */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <PollenParticle className="top-1/4 left-1/4" />
+        <PollenParticle className="top-3/4 right-1/4" />
+        <BeeTrail className="top-1/2" />
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-6 space-y-6">
-        
-        {/* AI Recommendations Banner */}
-        <AIRecommendations recommendations={mockRecommendations} />
+      {/* Hero Section */}
+      <section className="relative h-96 overflow-hidden floating-element">
+        <img 
+          src={heroImage} 
+          alt="Beekeeping operations in golden sunlight" 
+          className="absolute inset-0 w-full h-full object-cover animate-weather-transition"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
+        <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
+          <div className="max-w-4xl">
+            <h1 className="font-display text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+              BeeKeeper Pro
+              <BeeAnimation className="inline-block ml-4" size="lg" />
+            </h1>
+            <p className="font-body text-xl md:text-2xl mb-8 font-light">
+              AI-Powered Beekeeping Toolkit for Modern Apiaries
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Badge variant="secondary" className="text-lg px-4 py-2 btn-organic">
+                🌤️ Weather Insights
+              </Badge>
+              <Badge variant="secondary" className="text-lg px-4 py-2 btn-organic">
+                🐝 Hive Management
+              </Badge>
+              <Badge variant="secondary" className="text-lg px-4 py-2 btn-organic">
+                🤖 AI Recommendations
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Weather & Quick Actions Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
+      {/* Main Content Grid */}
+      <main className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+        <div className="lovable-card">
+          <AIRecommendations recommendations={mockRecommendations} />
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="lovable-card">
             <WeatherCard 
-              weather={mockWeatherData}
+              weather={mockWeatherData} 
               selectedTimeframe={selectedTimeframe}
               onTimeframeChange={setSelectedTimeframe}
             />
           </div>
-          <div>
+          <div className="lovable-card">
             <QuickActions />
           </div>
         </div>
-
-        {/* Hive Overview */}
-        <HiveOverview hives={mockHives} />
+        
+        <div className="lovable-card">
+          <HiveOverview hives={mockHives} />
+        </div>
 
         {/* Recent Activity */}
-        <Card className="weather-card">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-primary" />
-              Recent Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <Eye className="w-4 h-4 text-accent" />
-                  <span className="font-medium">Queen Anne Inspected</span>
+        <div className="lovable-card">
+          <Card className="border-0 shadow-none bg-transparent">
+            <CardHeader>
+              <CardTitle className="font-display flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Recent Activity
+                <BeeAnimation size="sm" className="ml-2" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg floating-element bee-hover-target">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <div>
+                      <p className="font-medium">Hive Alpha inspected</p>
+                      <p className="text-sm text-muted-foreground">2 hours ago</p>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="btn-organic">✅ Healthy</Badge>
                 </div>
-                <span className="text-sm text-muted-foreground">2 days ago</span>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <AlertTriangle className="w-4 h-4 text-amber" />
-                  <span className="font-medium">Weather Alert Created</span>
+                
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg floating-element bee-hover-target">
+                  <div className="flex items-center gap-3">
+                    <Users className="w-4 h-4 text-muted-foreground" />
+                    <div>
+                      <p className="font-medium">Weather alert issued</p>
+                      <p className="text-sm text-muted-foreground">1 day ago</p>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="btn-organic">⚠️ Rain Expected</Badge>
                 </div>
-                <span className="text-sm text-muted-foreground">5 hours ago</span>
+                
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg floating-element bee-hover-target">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                    <div>
+                      <p className="font-medium">Hive Beta relocated</p>
+                      <p className="text-sm text-muted-foreground">3 days ago</p>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="btn-organic">📍 New Location</Badge>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
     </div>
   );
 }
