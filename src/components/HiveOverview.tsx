@@ -27,9 +27,9 @@ const statusConfig = {
 };
 
 const temperamentConfig = {
-  calm: { label: "Calm", color: "bg-green-100 text-green-800" },
-  moderate: { label: "Moderate", color: "bg-yellow-100 text-yellow-800" },
-  aggressive: { label: "Aggressive", color: "bg-red-100 text-red-800" }
+  calm: { label: "Calm", color: "bg-accent/20 text-accent-foreground border-accent/30" },
+  moderate: { label: "Moderate", color: "hive-status-attention" },
+  aggressive: { label: "Aggressive", color: "bg-destructive/20 text-destructive-foreground border-destructive/30" }
 };
 
 const queenConfig = {
@@ -94,7 +94,7 @@ export function HiveOverview({ hives }: HiveOverviewProps) {
                   </div>
                   
                   <div className="flex items-center gap-2 text-sm">
-                    <Heart className="w-4 h-4 text-pink-500" />
+                    <Heart className="w-4 h-4 text-destructive" />
                     <Badge variant="outline" className={temperament.color}>
                       {temperament.label}
                     </Badge>

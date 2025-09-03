@@ -170,7 +170,9 @@ All colors MUST be HSL.
   }
   
   .hive-status-attention {
-    @apply bg-amber-100 text-amber-800 border-amber-200;
+    background-color: hsl(var(--amber) / 0.2);
+    color: hsl(var(--hive-brown));
+    border-color: hsl(var(--amber) / 0.4);
   }
   
   .hive-status-warning {

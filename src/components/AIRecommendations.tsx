@@ -17,9 +17,9 @@ const priorityConfig = {
   },
   medium: {
     icon: Info,
-    className: "border-amber-500/50 bg-amber-50 text-amber-900",
-    badgeClassName: "bg-amber-100 text-amber-800",
-    iconColor: "text-amber-600"
+    className: "hive-status-attention border-2",
+    badgeClassName: "hive-status-attention",
+    iconColor: "text-amber"
   },
   low: {
     icon: CheckCircle,
