@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -61,7 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				/* Beekeeping custom colors */
+				honey: {
+					DEFAULT: 'hsl(var(--honey))',
+					dark: 'hsl(var(--honey-dark))',
+					light: 'hsl(var(--honey-light))'
+				},
+				amber: 'hsl(var(--amber))',
+				nectar: 'hsl(var(--nectar))',
+				pollen: 'hsl(var(--pollen))',
+				hive: 'hsl(var(--hive-brown))',
+				field: 'hsl(var(--field-green))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
